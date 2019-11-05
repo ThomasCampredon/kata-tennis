@@ -3,16 +3,17 @@ package fr.unilim.iut.katatennis;
 public class TennisGame1 {
 	private Player player1; 
 	private Player player2;
+	private String score;
 
 
 	public TennisGame1(String player1Name, String player2Name) {
 		this.player1 = new Player(player1Name);
 		this.player2 = new Player(player2Name);
+		this.score = "";
 	}
 
 
 	public String getScore() {
-		String score = "";
 		int tempScore = 0;
 		if (thereIsEgality()) {
 			score = scoreEgalite();
@@ -31,26 +32,30 @@ public class TennisGame1 {
 				if (i == 1)
 					tempScore = player1.getScore();
 				else {
-					score += "-";
+					setScore(score+"-");
 					tempScore = player1.getScore();
 				}
 				switch (tempScore) {
 				case 0:
-					score += "Love";
+					setScore("Love");
 					break;
 				case 1:
-					score += "Fifteen";
+					setScore("Fifteen");
 					break;
 				case 2:
-					score += "Thirty";
+					setScore("Thirty");
 					break;
 				case 3:
-					score += "Forty";
+					setScore("Forty");
 					break;
 				}
 			}
 		}
 		return score;
+	}
+	
+	public void setScore(String scoreSentence) {
+		this.score = scoreSentence;
 	}
 
 
@@ -66,7 +71,6 @@ public class TennisGame1 {
 
 	
 	private String scoreEgalite() {
-		String score;
 		switch (player1.getScore()) {
 		case 0:
 			score = "Love-All";
