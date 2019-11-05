@@ -1,20 +1,34 @@
 package fr.unilim.iut.katatennis;
 
 public class Player {
-	private int scorePlayer;
+	private int score;
 	private String PlayerName;
 	
 	public Player(String PlayerName) {
-		this.scorePlayer = 0;
+		this.score = 0;
 		this.PlayerName = PlayerName;
 	}
+	
+	public Player(String PlayerName, int score) {
+		this.score = score;
+		this.PlayerName = PlayerName;
+	}
+	
+	public void wonPoint() {
+		this.score+=1;
+	}
+	
+	
 
-	public int getScorePlayer() {
-		return scorePlayer;
+	
+	
+
+	public int getScore() {
+		return score;
 	}
 
-	public void setScorePlayer(int scorePlayer) {
-		this.scorePlayer = scorePlayer;
+	public void setScore(int scorePlayer) {
+		this.score = scorePlayer;
 	}
 
 	public String getPlayerName() {

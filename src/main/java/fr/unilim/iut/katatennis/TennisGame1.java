@@ -1,33 +1,24 @@
 package fr.unilim.iut.katatennis;
 
 public class TennisGame1 {
-	private int scorePlayer1;
-	private int scorePlayer2;
-	private String player1Name; 
-	private String player2Name;
+	private Player player1; 
+	private Player player2;
+
 
 	public TennisGame1(String player1Name, String player2Name) {
-		this.player1Name = player1Name;
-		this.player2Name = player2Name;
-		this.scorePlayer1 = 0;
-		this.scorePlayer2 = 0;
+		this.player1 = new Player(player1Name);
+		this.player2 = new Player(player2Name);
 	}
 
-	public void wonPoint(String playerName) {
-		if (playerName == "player1")
-			scorePlayer1 += 1;
-		else
-			scorePlayer2 += 1;
-	}
 
 	public String getScore() {
 		String score = "";
 		int tempScore = 0;
-		if (scorePlayer1 == scorePlayer2) {
-			score = afficherScoreEgalite();
-		} else if (scorePlayer1 >= 4 || scorePlayer2 >= 4) {
-			int minusResult = scorePlayer1 - scorePlayer2;
-			if (minusResult == 1)
+		if (thereIsEgality()) {
+			score = scoreEgalite();
+		} else if (aPlayerCanWin()) {
+			int minusResult = player1.getScore() - player2.getScore();
+			if (minusResult >= 1)
 				score = "Advantage player1";
 			else if (minusResult == -1)
 				score = "Advantage player2";
@@ -38,10 +29,10 @@ public class TennisGame1 {
 		} else {
 			for (int i = 1; i < 3; i++) {
 				if (i == 1)
-					tempScore = scorePlayer1;
+					tempScore = player1.getScore();
 				else {
 					score += "-";
-					tempScore = scorePlayer2;
+					tempScore = player1.getScore();
 				}
 				switch (tempScore) {
 				case 0:
@@ -62,9 +53,21 @@ public class TennisGame1 {
 		return score;
 	}
 
-	private String afficherScoreEgalite() {
+
+	private boolean thereIsEgality() {
+		return player1.getScore() == player2.getScore();
+	}
+
+	
+
+	private boolean aPlayerCanWin() {
+		return player1.getScore() >= 4 || player2.getScore() >= 4;
+	}
+
+	
+	private String scoreEgalite() {
 		String score;
-		switch (this.scorePlayer1) {
+		switch (player1.getScore()) {
 		case 0:
 			score = "Love-All";
 			break;
